@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:16
+    container_name: checaantes-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: checaantes
+      POSTGRES_PASSWORD: checaantes
+      POSTGRES_DB: checaantes_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - checaantes_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U checaantes -d checaantes_dev"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: checaantes-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - checaantes_redis_data:/data
+
+volumes:
+  checaantes_db_data:
+  checaantes_redis_data:
