@@ -1,0 +1,28 @@
+info:
+  name: register
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/auth/register"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "email": "franfreitasfoto@gmail.com",
+        "password": "123456789"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: Cria um novo usuário. O campo role nunca é aceito neste endpoint — todo cadastro público nasce como "user".

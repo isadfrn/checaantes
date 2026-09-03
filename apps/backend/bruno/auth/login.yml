@@ -1,0 +1,28 @@
+info:
+  name: login
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/auth/login"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "email": "isadfrn@gmail.com",
+        "password": "JNzBQ$^$IhIj7IpPN3iY"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: Retorna { accessToken, user }. Copie o accessToken para a variável de coleção accessToken para usar nas rotas protegidas abaixo.

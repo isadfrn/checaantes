@@ -1,0 +1,40 @@
+opencollection: 1.0.0
+
+info:
+  name: checaantes
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ""
+      port: ""
+      auth:
+        username: ""
+        password: ""
+      bypassProxy: ""
+
+request:
+  variables:
+    - name: baseUrl
+      value: http://localhost:3000
+    - name: accessToken
+      value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4M2QxMzUxYS1mZjU1LTQ2YWEtYmI1OC0zZGQ5ODc2ZDBkYzYiLCJlbWFpbCI6ImlzYWRmcm5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg4NDUwOTA0LCJleHAiOjE3ODg1MzczMDR9.Kx9yjOVZnCowH2BhyDGTHwBhjFzA4xizkMa4Yburs1E
+    - name: professionId
+      value: f15933ac-fc03-40b6-a584-afc3798fa49a
+
+docs:
+  content: |-
+    Coleção com todas as rotas implementadas até a Parte 2 do backend: autenticação (JWT) e CRUD de profissões, protegido por papel (admin/user).
+
+    Como usar:
+    1. Rode `POST /auth/login` com o admin criado pelo seed (ou `POST /auth/register` para um usuário comum).
+    2. Copie o `accessToken` da resposta e cole na variável de coleção `accessToken` (aba Variables da coleção, no Bruno).
+    3. As rotas protegidas (criar/editar/remover profissão) já usam `{{accessToken}}` automaticamente no header Authorization.
+  type: text/markdown
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git
