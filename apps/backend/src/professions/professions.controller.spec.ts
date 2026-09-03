@@ -2,6 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ProfessionsController } from './professions.controller.js';
 import { ProfessionsService } from './professions.service.js';
 import { Profession } from './entities/profession.entity.js';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
+import { RolesGuard } from '../auth/guards/roles.guard.js';
 
 const profession: Profession = {
   id: 'uuid-1',
@@ -17,6 +19,8 @@ describe('ProfessionsController', () => {
     findAll: vi.fn(),
     findOne: vi.fn(),
     create: vi.fn(),
+    update: vi.fn(),
+    remove: vi.fn(),
   };
 
   beforeEach(async () => {
@@ -27,7 +31,12 @@ describe('ProfessionsController', () => {
       providers: [
         { provide: ProfessionsService, useValue: professionsService },
       ],
-    }).compile();
+    })
+      .overrideGuard(JwtAuthGuard)
+      .useValue({ canActivate: () => true })
+      .overrideGuard(RolesGuard)
+      .useValue({ canActivate: () => true })
+      .compile();
 
     controller = module.get(ProfessionsController);
   });
@@ -66,6 +75,26 @@ describe('ProfessionsController', () => {
 
       await expect(controller.create(data)).resolves.toEqual(profession);
       expect(professionsService.create).toHaveBeenCalledWith(data);
+    });
+  });
+
+  describe('update', () => {
+    it('delegates to the service with id and body', async () => {
+      const data: Partial<Profession> = { name: 'Odontologia' };
+      const updated = { ...profession, ...data };
+      professionsService.update.mockResolvedValue(updated);
+
+      await expect(controller.update(profession.id, data)).resolves.toEqual(updated);
+      expect(professionsService.update).toHaveBeenCalledWith(profession.id, data);
+    });
+  });
+
+  describe('remove', () => {
+    it('delegates to the service with the given id', async () => {
+      professionsService.remove.mockResolvedValue(undefined);
+
+      await expect(controller.remove(profession.id)).resolves.toBeUndefined();
+      expect(professionsService.remove).toHaveBeenCalledWith(profession.id);
     });
   });
 });

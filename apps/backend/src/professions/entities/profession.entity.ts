@@ -5,12 +5,16 @@ import { ViolationCategory } from './violation-category.entity.js';
 export class Profession {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-  @Column()
+
+  @Column({ type: 'varchar' })
   name: string;
-  @Column()
+
+  @Column({ type: 'varchar' })
   federalCouncil: string;
+
   @Column({ type: 'jsonb', nullable: true })
   regionalCouncils: string[];
+
   @OneToMany(() => ViolationCategory, (category) => category.profession)
   violationCategories: ViolationCategory[];
 }

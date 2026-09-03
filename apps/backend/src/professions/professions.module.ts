@@ -1,12 +1,16 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from '../auth/auth.module.js';
 import { Profession } from './entities/profession.entity.js';
 import { ViolationCategory } from './entities/violation-category.entity.js';
 import { ProfessionsService } from './professions.service.js';
 import { ProfessionsController } from './professions.controller.js';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Profession, ViolationCategory])],
+  imports: [
+    TypeOrmModule.forFeature([Profession, ViolationCategory]),
+    AuthModule,
+  ],
   providers: [ProfessionsService],
   controllers: [ProfessionsController],
   exports: [ProfessionsService],

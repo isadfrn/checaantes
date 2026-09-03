@@ -19,6 +19,7 @@ describe('ProfessionsService', () => {
     findOne: vi.fn(),
     create: vi.fn(),
     save: vi.fn(),
+    remove: vi.fn(),
   };
 
   beforeEach(async () => {
@@ -82,6 +83,44 @@ describe('ProfessionsService', () => {
       await expect(service.create(data)).resolves.toEqual(profession);
       expect(professionRepository.create).toHaveBeenCalledWith(data);
       expect(professionRepository.save).toHaveBeenCalledWith(profession);
+    });
+  });
+
+  describe('update', () => {
+    it('updates and saves the profession', async () => {
+      const data: Partial<Profession> = { name: 'Odontologia' };
+      const updated = { ...profession, ...data };
+      professionRepository.findOne.mockResolvedValue({ ...profession });
+      professionRepository.save.mockResolvedValue(updated);
+
+      await expect(service.update(profession.id, data)).resolves.toEqual(updated);
+      expect(professionRepository.save).toHaveBeenCalledWith(updated);
+    });
+
+    it('throws NotFoundException when the profession does not exist', async () => {
+      professionRepository.findOne.mockResolvedValue(null);
+
+      await expect(service.update('missing', { name: 'X' })).rejects.toThrow(
+        NotFoundException,
+      );
+    });
+  });
+
+  describe('remove', () => {
+    it('removes the profession', async () => {
+      professionRepository.findOne.mockResolvedValue(profession);
+      professionRepository.remove.mockResolvedValue(undefined);
+
+      await expect(service.remove(profession.id)).resolves.toBeUndefined();
+      expect(professionRepository.remove).toHaveBeenCalledWith(profession);
+    });
+
+    it('throws NotFoundException when the profession does not exist', async () => {
+      professionRepository.findOne.mockResolvedValue(null);
+
+      await expect(service.remove('missing')).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 });
