@@ -5,6 +5,7 @@ import { createObserveModule } from '@nestjs/observe';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { ProfessionsModule } from './professions/professions.module.js';
+import { AuthModule } from './auth/auth.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -28,9 +29,10 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
       autoLoadEntities: true,
-      synchronize: true,
+      synchronize: false,
     }),
     ProfessionsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
