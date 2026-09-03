@@ -5,10 +5,13 @@ import type { Profession } from './profession.entity.js';
 export class ViolationCategory {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-  @Column()
+
+  @Column({ type: 'varchar' })
   name: string;
+
   @Column({ type: 'text', nullable: true })
   description: string;
+
   @ManyToOne(
     'Profession',
     (profession: Profession) => profession.violationCategories,
