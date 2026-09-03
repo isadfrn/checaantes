@@ -57,28 +57,28 @@ The API listens on `http://localhost:3000`.
 
 Useful scripts in `apps/backend`:
 
-| Script | Purpose |
-| --- | --- |
-| `npm run start:dev` | API in watch mode |
-| `npm test` | unit tests |
-| `npm run test:cov` | tests with coverage |
-| `npm run migration:generate -- src/database/migrations/Name` | generate a migration (space after `--`) |
-| `npm run migration:run` | run migrations |
-| `npm run migration:revert` | revert the last migration |
-| `npm run seed` | create the CFMV profession and admin user |
+| Script                                                       | Purpose                                   |
+| ------------------------------------------------------------ | ----------------------------------------- |
+| `npm run start:dev`                                          | API in watch mode                         |
+| `npm test`                                                   | unit tests                                |
+| `npm run test:cov`                                           | tests with coverage                       |
+| `npm run migration:generate -- src/database/migrations/Name` | generate a migration (space after `--`)   |
+| `npm run migration:run`                                      | run migrations                            |
+| `npm run migration:revert`                                   | revert the last migration                 |
+| `npm run seed`                                               | create the CFMV profession and admin user |
 
 HTTP collection: [`apps/backend/bruno`](apps/backend/bruno).
 
 ### Routes
 
-| Method | Route | Auth |
-| --- | --- | --- |
-| `POST` | `/auth/register` | public |
-| `POST` | `/auth/login` | public |
-| `GET` | `/professions` | public |
-| `GET` | `/professions/:id` | public |
-| `POST` | `/professions` | JWT + `admin` |
-| `PATCH` | `/professions/:id` | JWT + `admin` |
+| Method   | Route              | Auth          |
+| -------- | ------------------ | ------------- |
+| `POST`   | `/auth/register`   | public        |
+| `POST`   | `/auth/login`      | public        |
+| `GET`    | `/professions`     | public        |
+| `GET`    | `/professions/:id` | public        |
+| `POST`   | `/professions`     | JWT + `admin` |
+| `PATCH`  | `/professions/:id` | JWT + `admin` |
 | `DELETE` | `/professions/:id` | JWT + `admin` |
 
 ## Project Structure
@@ -95,4 +95,4 @@ Maintaining
 
 ## License
 
-[MIT](./LICENSE)
+[PolyForm Noncommercial License 1.0.0](./LICENSE)
