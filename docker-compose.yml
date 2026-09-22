@@ -26,6 +26,14 @@ services:
     volumes:
       - checaantes_redis_data:/data
 
+  maildev:
+    image: maildev/maildev:latest
+    container_name: checaantes-maildev
+    restart: unless-stopped
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+
   unleash-db:
     image: postgres:16
     container_name: checaantes-unleash-db

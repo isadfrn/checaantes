@@ -1,0 +1,15 @@
+{
+  "header": "# Changelog\n\nTodas as mudanças relevantes deste projeto são documentadas aqui.\n",
+  "types": [
+    { "type": "feat", "section": "Funcionalidades" },
+    { "type": "fix", "section": "Correções" },
+    { "type": "perf", "section": "Desempenho" },
+    { "type": "refactor", "section": "Refatoração" },
+    { "type": "docs", "section": "Documentação" },
+    { "type": "test", "section": "Testes" },
+    { "type": "build", "section": "Build" },
+    { "type": "ci", "section": "Integração Contínua" },
+    { "type": "chore", "hidden": true },
+    { "type": "style", "hidden": true }
+  ]
+}
