@@ -9,11 +9,11 @@ export class Profession {
   @Column({ type: 'varchar' })
   name: string;
 
-  @Column({ type: 'varchar' })
-  federalCouncil: string;
+  @Column({ type: 'varchar', nullable: true })
+  federalCouncil: string | null;
 
   @Column({ type: 'jsonb', nullable: true })
-  regionalCouncils: string[];
+  regionalCouncils: string[] | null;
 
   @OneToMany(() => ViolationCategory, (category) => category.profession)
   violationCategories: ViolationCategory[];
