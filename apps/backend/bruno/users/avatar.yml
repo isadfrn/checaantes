@@ -1,0 +1,32 @@
+info:
+  name: avatar
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{baseUrl}}/users/me/avatar"
+  headers:
+    - name: Authorization
+      value: Bearer {{accessToken}}
+  body:
+    type: multipart-form
+    data:
+      - name: file
+        partType: file
+        value:
+          - /caminho/para/imagem.png
+        contentType: image/png
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: |-
+  Envia a imagem de perfil (multipart, campo "file"). No Bruno, clique no campo do arquivo e selecione a imagem do seu computador (o caminho de exemplo aqui é só um placeholder). Não adicione header Content-Type — o Bruno define o multipart/form-data com boundary automaticamente.
+
+  Aceita png/jpg/jpeg/webp/gif até 5 MB. Retorna { avatarUrl }, que é servido em /uploads. Arquivo não-imagem retorna 400.

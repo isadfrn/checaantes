@@ -1,0 +1,25 @@
+info:
+  name: confirm
+  type: http
+  seq: 3
+
+http:
+  method: GET
+  url: "{{baseUrl}}/auth/confirm?token={{confirmToken}}"
+  params:
+    - name: token
+      value: "{{confirmToken}}"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: |-
+  Confirma o e-mail de uma conta recém-criada. É o endpoint acessado pelo link enviado no e-mail.
+
+  Como usar: pegue o token do e-mail capturado pelo Maildev (http://localhost:1080) e cole na variável de coleção `confirmToken`. Depois de confirmar, o login passa a funcionar.

@@ -21,16 +21,26 @@ request:
     - name: accessToken
       value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4M2QxMzUxYS1mZjU1LTQ2YWEtYmI1OC0zZGQ5ODc2ZDBkYzYiLCJlbWFpbCI6ImlzYWRmcm5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg4NDUwOTA0LCJleHAiOjE3ODg1MzczMDR9.Kx9yjOVZnCowH2BhyDGTHwBhjFzA4xizkMa4Yburs1E
     - name: professionId
-      value: f15933ac-fc03-40b6-a584-afc3798fa49a
+      value: ""
+    - name: confirmToken
+      value: ""
+    - name: resetCode
+      value: ""
 
 docs:
   content: |-
-    Coleção com todas as rotas implementadas até a Parte 2 do backend: autenticação (JWT) e CRUD de profissões, protegido por papel (admin/user).
+    Coleção com as rotas do backend até a Parte 3: autenticação (JWT) com confirmação de e-mail, CRUD de profissões protegido por papel (admin/user) e cadastro com nome/telefone/estado.
 
-    Como usar:
-    1. Rode `POST /auth/login` com o admin criado pelo seed (ou `POST /auth/register` para um usuário comum).
-    2. Copie o `accessToken` da resposta e cole na variável de coleção `accessToken` (aba Variables da coleção, no Bruno).
-    3. As rotas protegidas (criar/editar/remover profissão) já usam `{{accessToken}}` automaticamente no header Authorization.
+    Fluxo de cadastro (Parte 3):
+    1. Rode `POST /auth/register` (só "SC" é aceito enquanto a flag do Unleash "cadastro-nacional-liberado" estiver off).
+    2. O e-mail de confirmação é capturado pelo Maildev em http://localhost:1080. Copie o token do link e cole na variável `confirmToken`.
+    3. Rode `GET /auth/confirm` — a conta passa a poder logar.
+    4. `POST /auth/login` só funciona depois de confirmado; antes disso retorna 403.
+
+    Rotas protegidas de profissões:
+    1. Rode `POST /auth/login` com o admin criado pelo seed.
+    2. Copie o `accessToken` da resposta para a variável de coleção `accessToken`.
+    3. As rotas de criar/editar/remover profissão já usam `{{accessToken}}` no header Authorization.
   type: text/markdown
 bundled: false
 extensions:

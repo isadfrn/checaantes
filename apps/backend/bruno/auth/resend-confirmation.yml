@@ -1,0 +1,28 @@
+info:
+  name: resend-confirmation
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{baseUrl}}/auth/resend-confirmation"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "email": "franfreitasfoto@gmail.com"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: |-
+  Reenvia o e-mail de confirmação para uma conta ainda não confirmada. A resposta é sempre a mesma (mensagem genérica), exista a conta ou não, para não revelar quais e-mails têm cadastro.

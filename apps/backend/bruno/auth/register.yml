@@ -13,8 +13,13 @@ http:
     type: json
     data: |-
       {
+        "name": "Fran Freitas",
         "email": "franfreitasfoto@gmail.com",
-        "password": "123456789"
+        "phone": "(48) 99999-9999",
+        "state": "SC",
+        "professionId": "{{professionId}}",
+        "password": "123456789",
+        "passwordConfirmation": "123456789"
       }
   auth: inherit
 
@@ -25,4 +30,11 @@ settings:
   maxRedirects: 5
   forwardAuthorizationHeader: false
 
-docs: Cria um novo usuário. O campo role nunca é aceito neste endpoint — todo cadastro público nasce como "user".
+docs: |-
+  Cria um novo usuário. O campo role nunca é aceito neste endpoint — todo cadastro público nasce como "user".
+
+  Não retorna mais accessToken: a conta nasce não confirmada e o login fica bloqueado até confirmar o e-mail. Em dev, o e-mail de confirmação é capturado pelo Maildev em http://localhost:1080 — abra o link de lá (ou copie o token para a request "confirm").
+
+  Sobre o campo state (UF): enquanto a flag do Unleash "cadastro-nacional-liberado" estiver desligada, só "SC" é aceito; qualquer outro estado retorna 403.
+
+  professionId: pegue um id em GET /professions e coloque na variável de coleção `professionId`. passwordConfirmation precisa ser igual a password.

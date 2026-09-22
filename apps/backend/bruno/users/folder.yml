@@ -1,0 +1,18 @@
+info:
+  name: users
+  type: folder
+  seq: 3
+
+request:
+  auth: inherit
+
+docs: |-
+  Perfil do usuário logado. Todas as rotas exigem o header Authorization: Bearer {{accessToken}} (faça login e copie o accessToken para a variável de coleção).
+
+  Upload de avatar (multipart) — teste via curl, pois é envio de arquivo:
+
+    curl -X POST http://localhost:3000/users/me/avatar \
+      -H "Authorization: Bearer SEU_TOKEN" \
+      -F "file=@caminho/para/imagem.png;type=image/png"
+
+  Aceita png/jpg/jpeg/webp/gif até 5 MB. Retorna { avatarUrl }, servido em /uploads.

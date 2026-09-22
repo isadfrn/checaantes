@@ -1,0 +1,30 @@
+info:
+  name: update-profile
+  type: http
+  seq: 2
+
+http:
+  method: PATCH
+  url: "{{baseUrl}}/users/me"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{accessToken}}
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Fran Freitas da Silva",
+        "phone": "(11) 98888-7777"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: Atualiza nome e/ou telefone (ambos opcionais). Retorna o perfil atualizado.

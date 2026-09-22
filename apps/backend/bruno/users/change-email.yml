@@ -1,0 +1,30 @@
+info:
+  name: change-email
+  type: http
+  seq: 4
+
+http:
+  method: PATCH
+  url: "{{baseUrl}}/users/me/email"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{accessToken}}
+  body:
+    type: json
+    data: |-
+      {
+        "email": "novo-email@example.com"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: |-
+  Solicita a troca de e-mail. O novo endereço vira "pendente" e recebe um link de confirmação (Maildev). O e-mail atual continua valendo até o novo ser confirmado (via GET /auth/confirm). Retorna 409 se o e-mail já estiver em uso.
